@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-12 text-center">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-chart-line"></i> Student Performance Prediction System
+        </h1>
+        <p class="lead">AI-powered student grade prediction using machine learning</p>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Manage Students</h5>
+                <p class="card-text">Add, view, and manage student information</p>
+                <a href="{{ url_for('students') }}" class="btn btn-primary">View Students</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-brain fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Predict Performance</h5>
+                <p class="card-text">Use AI to predict student grades</p>
+                <a href="{{ url_for('students') }}" class="btn btn-success">Make Prediction</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-chart-bar fa-3x text-info mb-3"></i>
+                <h5 class="card-title">Analytics</h5>
+                <p class="card-text">View performance statistics and insights</p>
+                <a href="{{ url_for('analytics') }}" class="btn btn-info">View Analytics</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-info-circle"></i> About This System</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Student management with MySQL database</li>
+                    <li>Machine Learning model (Random Forest Classifier)</li>
+                    <li>Performance prediction based on multiple factors</li>
+                    <li>Analytics dashboard with visualizations</li>
+                    <li>Complete CRUD operations</li>
+                </ul>
+                <p><strong>Prediction Factors:</strong> Study hours, previous scores, attendance, extracurricular activities, sleep hours, and tutoring</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

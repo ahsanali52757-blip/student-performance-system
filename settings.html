@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-4"><i class="fas fa-cog"></i> Settings & Preferences</h2>
+        <p class="text-muted">Configure your system preferences and notification settings</p>
+    </div>
+</div>
+
+<form method="POST">
+    <!-- Card 1: Gender Selection (RadioButton) -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5><i class="fas fa-circle-dot"></i> Radio Buttons - Gender Selection</h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-3">Select your gender:</p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" checked>
+                <label class="form-check-label" for="male">
+                    <i class="fas fa-male"></i> Male
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                <label class="form-check-label" for="female">
+                    <i class="fas fa-female"></i> Female
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                <label class="form-check-label" for="other">
+                    <i class="fas fa-genderless"></i> Other
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2: Notification Preferences (CheckBox) -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5><i class="fas fa-check-square"></i> Check Boxes - Notification Preferences</h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-3">Select your notification preferences:</p>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="notifications[]" value="email" id="email-notif" checked>
+                <label class="form-check-label" for="email-notif">
+                    <i class="fas fa-envelope"></i> Email Notifications
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="notifications[]" value="sms" id="sms-notif">
+                <label class="form-check-label" for="sms-notif">
+                    <i class="fas fa-sms"></i> SMS Notifications
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="notifications[]" value="push" id="push-notif" checked>
+                <label class="form-check-label" for="push-notif">
+                    <i class="fas fa-bell"></i> Push Notifications
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="notifications[]" value="newsletter" id="newsletter">
+                <label class="form-check-label" for="newsletter">
+                    <i class="fas fa-newspaper"></i> Weekly Newsletter
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3: Study Hours Range (Slider) -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5><i class="fas fa-sliders-h"></i> Slider - Study Hours Preference</h5>
+        </div>
+        <div class="card-body">
+            <label for="studyHoursSlider" class="form-label">
+                Daily Study Hours Target: <span id="studyHoursValue">5</span> hours
+            </label>
+            <input type="range" class="form-range" min="1" max="12" step="0.5" value="5" 
+                   id="studyHoursSlider" name="study_hours" 
+                   oninput="document.getElementById('studyHoursValue').textContent = this.value">
+            <small class="text-muted d-block mt-2">
+                <i class="fas fa-info-circle"></i> Adjust your preferred daily study hours
+            </small>
+        </div>
+    </div>
+
+    <!-- Card 4: Attendance Percentage (Slider) -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning text-dark">
+            <h5><i class="fas fa-sliders-h"></i> Slider - Attendance Goal</h5>
+        </div>
+        <div class="card-body">
+            <label for="attendanceSlider" class="form-label">
+                Target Attendance: <span id="attendanceValue">85</span>%
+            </label>
+            <input type="range" class="form-range" min="50" max="100" step="1" value="85" 
+                   id="attendanceSlider" name="attendance" 
+                   oninput="document.getElementById('attendanceValue').textContent = this.value">
+            <div class="progress mt-3" style="height: 25px;">
+                <div class="progress-bar" id="attendanceProgress" role="progressbar" 
+                     style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                    85%
+                </div>
+            </div>
+            <script>
+                document.getElementById('attendanceSlider').addEventListener('input', function() {
+                    const value = this.value;
+                    document.getElementById('attendanceProgress').style.width = value + '%';
+                    document.getElementById('attendanceProgress').textContent = value + '%';
+                    document.getElementById('attendanceProgress').setAttribute('aria-valuenow', value);
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Card 5: Course Selection (List with Scrollbar) -->
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <h5><i class="fas fa-list"></i> List with Scrollbar - Course Selection</h5>
+        </div>
+        <div class="card-body">
+            <label for="courseList" class="form-label">Select your enrolled courses:</label>
+            <select class="form-select" id="courseList" name="courses[]" multiple size="8" 
+                    style="overflow-y: auto; max-height: 200px;">
+                <optgroup label="Computer Science">
+                    <option value="cs101">CS101 - Introduction to Programming</option>
+                    <option value="cs102">CS102 - Data Structures</option>
+                    <option value="cs201">CS201 - Algorithms</option>
+                    <option value="cs202">CS202 - Database Systems</option>
+                    <option value="cs301">CS301 - Web Development</option>
+                </optgroup>
+                <optgroup label="Mathematics">
+                    <option value="math101">MATH101 - Calculus I</option>
+                    <option value="math102">MATH102 - Linear Algebra</option>
+                    <option value="math201">MATH201 - Discrete Mathematics</option>
+                </optgroup>
+                <optgroup label="Physics">
+                    <option value="phy101">PHY101 - Physics I</option>
+                    <option value="phy102">PHY102 - Physics II</option>
+                </optgroup>
+            </select>
+            <small class="text-muted d-block mt-2">
+                <i class="fas fa-info-circle"></i> Hold Ctrl (Windows) or Cmd (Mac) to select multiple courses
+            </small>
+        </div>
+    </div>
+
+    <!-- Card 6: Priority Tasks (List) -->
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h5><i class="fas fa-tasks"></i> List - Priority Tasks</h5>
+        </div>
+        <div class="card-body">
+            <label for="taskList" class="form-label">Your Priority Tasks:</label>
+            <div class="list-group" id="taskList" style="max-height: 250px; overflow-y: auto;">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"><i class="fas fa-check-circle text-success"></i> Complete Assignment 1</h6>
+                        <small class="text-muted">Due: Today</small>
+                    </div>
+                    <p class="mb-1">Finish the Python programming assignment</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"><i class="fas fa-clock text-warning"></i> Study for Exam</h6>
+                        <small class="text-muted">Due: Tomorrow</small>
+                    </div>
+                    <p class="mb-1">Prepare for Database Systems midterm</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"><i class="fas fa-book text-info"></i> Read Chapter 5</h6>
+                        <small class="text-muted">Due: This Week</small>
+                    </div>
+                    <p class="mb-1">Data Structures textbook chapter on Trees</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"><i class="fas fa-users text-primary"></i> Group Project Meeting</h6>
+                        <small class="text-muted">Friday</small>
+                    </div>
+                    <p class="mb-1">Discuss web development project progress</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"><i class="fas fa-code text-danger"></i> Practice Coding</h6>
+                        <small class="text-muted">Daily</small>
+                    </div>
+                    <p class="mb-1">Solve at least 2 LeetCode problems</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"><i class="fas fa-file-alt text-secondary"></i> Write Report</h6>
+                        <small class="text-muted">Next Week</small>
+                    </div>
+                    <p class="mb-1">Lab report for Physics experiment</p>
+                </a>
+            </div>
+            <small class="text-muted d-block mt-2">
+                <i class="fas fa-info-circle"></i> Scrollable list with multiple items
+            </small>
+        </div>
+    </div>
+
+    <!-- Card 7: Long Content with Scrollbar (TextArea) -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5><i class="fas fa-scroll"></i> TextArea with Scrollbar - Notes</h5>
+        </div>
+        <div class="card-body">
+            <label for="notesArea" class="form-label">Personal Notes:</label>
+            <textarea class="form-control" id="notesArea" name="notes" rows="8" 
+                      style="overflow-y: auto; max-height: 200px;" 
+                      placeholder="Write your notes here...">Sample content to demonstrate scrollbar functionality.
+
+This is a multi-line text area with scrollbar enabled when content exceeds the visible area.
+
+You can write long notes here and the scrollbar will appear automatically.
+
+Study Tips:
+- Review notes daily
+- Practice problems regularly
+- Join study groups
+- Ask questions in class
+- Take breaks during study sessions
+- Stay organized with a planner
+- Get enough sleep before exams
+- Eat healthy meals
+- Exercise regularly
+- Stay motivated and positive
+
+Remember: Consistency is key to academic success!</textarea>
+            <small class="text-muted d-block mt-2">
+                <i class="fas fa-info-circle"></i> Scroll to see more content
+            </small>
+        </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-save"></i> Save All Settings
+            </button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-lg ms-2">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </div>
+</form>
+
+<!-- Summary Card -->
+<div class="card mb-4">
+    <div class="card-header bg-success text-white">
+        <h5><i class="fas fa-check-double"></i> GUI Components Demonstration</h5>
+    </div>
+    <div class="card-body">
+        <h6 class="mb-3">This page demonstrates all required GUI components:</h6>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Radio Buttons</strong> - Gender selection</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Check Boxes</strong> - Notification preferences</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Sliders</strong> - Study hours & attendance</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>List with Scrollbar</strong> - Course selection</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>List Component</strong> - Priority tasks</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Scrollbar</strong> - Long content areas</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>TextArea</strong> - Notes section</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Buttons</strong> - Save & Cancel</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <p class="text-muted">Welcome back, {{ session.full_name }}!</p>
+            </div>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card text-center" style="border-left: 4px solid #667eea;">
+            <div class="card-body">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h1 class="display-4">{{ total_students }}</h1>
+                <p class="lead">Total Students</p>
+                <a href="{{ url_for('students') }}" class="btn btn-sm btn-primary">View All</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card text-center" style="border-left: 4px solid #28a745;">
+            <div class="card-body">
+                <i class="fas fa-brain fa-3x text-success mb-3"></i>
+                <h1 class="display-4">{{ total_predictions }}</h1>
+                <p class="lead">Total Predictions</p>
+                <a href="{{ url_for('analytics') }}" class="btn btn-sm btn-success">View Analytics</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card text-center" style="border-left: 4px solid #17a2b8;">
+            <div class="card-body">
+                <i class="fas fa-user-plus fa-3x text-info mb-3"></i>
+                <h3 class="mt-3">Quick Actions</h3>
+                <p class="text-muted">Add new student</p>
+                <a href="{{ url_for('add_student') }}" class="btn btn-sm btn-info">
+                    <i class="fas fa-plus"></i> Add Student
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-rocket"></i> Quick Start Guide</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <span class="badge bg-primary rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">1</span>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6>Add Students</h6>
+                                <p class="text-muted small">Start by adding student information to the system.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <span class="badge bg-success rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">2</span>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6>Make Predictions</h6>
+                                <p class="text-muted small">Use AI to predict student performance grades.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <span class="badge bg-info rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">3</span>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6>View Analytics</h6>
+                                <p class="text-muted small">Analyze performance data and track progress.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5><i class="fas fa-chart-line"></i> System Features</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> AI-Powered Grade Prediction</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Student Management System</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Performance Tracking</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Analytics Dashboard</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Secure Authentication</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Historical Records</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

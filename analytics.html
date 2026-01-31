@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-4"><i class="fas fa-chart-bar"></i> Analytics Dashboard</h2>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h1 class="display-4 text-primary">{{ total_students }}</h1>
+                <p class="lead">Total Students</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h1 class="display-4 text-success">{{ total_predictions }}</h1>
+                <p class="lead">Total Predictions</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-chart-pie"></i> Grade Distribution</h5>
+            </div>
+            <div class="card-body">
+                {% if grade_distribution %}
+                <canvas id="gradeChart"></canvas>
+                {% else %}
+                <div class="text-center py-5">
+                    <p class="text-muted">No prediction data available yet</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if grade_distribution %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('gradeChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{% for item in grade_distribution %}'{{ item.predicted_grade }}',{% endfor %}],
+            datasets: [{
+                label: 'Number of Students',
+                data: [{% for item in grade_distribution %}{{ item.count }},{% endfor %}],
+                backgroundColor: [
+                    'rgba(40, 167, 69, 0.8)',
+                    'rgba(0, 123, 255, 0.8)',
+                    'rgba(255, 193, 7, 0.8)',
+                    'rgba(255, 133, 51, 0.8)',
+                    'rgba(220, 53, 69, 0.8)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h4><i class="fas fa-user"></i> {{ student.name }}'s Performance Records</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Email:</strong> {{ student.email }}</p>
+                <p><strong>Age:</strong> {{ student.age }} | <strong>Gender:</strong> {{ student.gender }}</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                {% if records %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Date</th>
+                                <th>Study Hours</th>
+                                <th>Previous Score</th>
+                                <th>Attendance</th>
+                                <th>Extra Activities</th>
+                                <th>Sleep Hours</th>
+                                <th>Tutoring</th>
+                                <th>Predicted Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in records %}
+                            <tr>
+                                <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>{{ record.study_hours }}</td>
+                                <td>{{ record.previous_score }}%</td>
+                                <td>{{ record.attendance_percentage }}%</td>
+                                <td>{{ record.extracurricular }}</td>
+                                <td>{{ record.sleep_hours }}</td>
+                                <td>{{ record.tutoring }}</td>
+                                <td>
+                                    <span class="badge 
+                                        {% if record.predicted_grade == 'A' %}bg-success
+                                        {% elif record.predicted_grade == 'B' %}bg-primary
+                                        {% elif record.predicted_grade == 'C' %}bg-warning text-dark
+                                        {% elif record.predicted_grade == 'D' %}bg-orange
+                                        {% else %}bg-danger{% endif %}">
+                                        {{ record.predicted_grade }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-clipboard fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No performance records yet</p>
+                    <a href="{{ url_for('predict', student_id=student.id) }}" class="btn btn-success">
+                        <i class="fas fa-brain"></i> Make First Prediction
+                    </a>
+                </div>
+                {% endif %}
+                <div class="mt-3">
+                    <a href="{{ url_for('students') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Students
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
