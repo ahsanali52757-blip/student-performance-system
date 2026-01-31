@@ -755,18 +755,18 @@ if __name__ == '__main__':
 
 For issues, questions, or contributions:
 
-- **Email:** ahsanali7@gmail.com
-- **GitHub Issues:** https://github.com/ahsan ali/student-performance-system/issues
+- **Email:** ahsanali52757@gmail.com
+- **GitHub Issues:** https://github.com/ahsanali52757-blip/student-performance-system
 - **Documentation:** This README file
 
 ---
 
 ## 👥 Contributors
 
-- **Your Name** - Developer
+- **Your Name** - Ahsan Ali
 - **Institution** - Academic Project
 - **Course** - Web Development / Machine Learning
-- **Semester** - [Your Semester/Year]
+- **Semester** - [6th/2025]
 
 ---
 
@@ -823,5 +823,6 @@ This project is created for educational purposes as part of academic coursework.
 **Made with ❤️ for learning and academic excellence**
 
 ---
+
 
 *Last Updated: December 2025*
